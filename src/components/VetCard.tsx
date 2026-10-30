@@ -14,24 +14,23 @@ const BLURHASH = "L5H2EC=PM+yV0g-mq.wG9c010J}I";
 type Props = {
   vet: Vet;
   onPress: (vet: Vet) => void;
+  onPressIn?: (vet: Vet) => void;
   onLongPress?: (vet: Vet) => void;
 };
 
-function VetCardComponent({ vet, onPress, onLongPress }: Props) {
+function VetCardComponent({ vet, onPress, onPressIn, onLongPress }: Props) {
   const theme = useAppTheme();
   return (
     <Pressable
       onPress={() => onPress(vet)}
+      onPressIn={() => onPressIn?.(vet)}
       onLongPress={() => onLongPress?.(vet)}
       delayLongPress={350}
       android_ripple={{ color: "rgba(0,0,0,0.12)", foreground: true }}
       // A function in `style` receives { pressed } – press feedback on iOS
       style={({ pressed }) => [
         styles.card,
-        {
-          backgroundColor: theme.colors.surface,
-          borderColor: theme.colors.border,
-        },
+        { backgroundColor: theme.colors.surface, borderColor: theme.colors.border },
         pressed && Platform.OS === "ios" && styles.pressed,
       ]}
       accessibilityRole="button"
@@ -57,9 +56,7 @@ function VetCardComponent({ vet, onPress, onLongPress }: Props) {
         <RatingStars rating={vet.rating} size={12} />
       </View>
       {vet.isNew && (
-        <View
-          style={[styles.ribbon, { backgroundColor: theme.colors.primary }]}
-        >
+        <View style={[styles.ribbon, { backgroundColor: theme.colors.primary }]}>
           <AppText variant="label" color={theme.colors.onPrimary}>
             New
           </AppText>

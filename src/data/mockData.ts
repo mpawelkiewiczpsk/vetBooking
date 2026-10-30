@@ -1,17 +1,9 @@
 // src/data/mockData.ts – sample data (from L06 it comes from the API)
-import type {
-  Clinic,
-  Schedule,
-  Service,
-  Specialty,
-  Species,
-  Vet,
-} from "./types";
+import type { Clinic, Schedule, Service, Specialty, Species, Vet } from "./types";
 
 // Images from picsum.photos – free photos generated from a "seed"
 const photo = (seed: string) => `https://picsum.photos/seed/${seed}/400/400`;
-const cover = (seed: string) =>
-  `https://picsum.photos/seed/${seed}-cover/1200/675`;
+const cover = (seed: string) => `https://picsum.photos/seed/${seed}-cover/1200/675`;
 
 export const SPECIALTIES: Specialty[] = [
   "General practice",
@@ -25,27 +17,9 @@ export const SPECIALTIES: Specialty[] = [
 export const SPECIES: Species[] = ["dog", "cat", "rabbit", "bird", "reptile"];
 
 export const CLINICS: Clinic[] = [
-  {
-    id: "c1",
-    name: "vetBooking Downtown",
-    address: "12 Main Street",
-    rooms: 4,
-    isEmergency: false,
-  },
-  {
-    id: "c2",
-    name: "vetBooking Riverside",
-    address: "48 River Road",
-    rooms: 3,
-    isEmergency: false,
-  },
-  {
-    id: "c3",
-    name: "vetBooking 24/7",
-    address: "5 Station Square",
-    rooms: 6,
-    isEmergency: true,
-  },
+  { id: "c1", name: "PawCare Downtown", address: "12 Main Street", rooms: 4, isEmergency: false },
+  { id: "c2", name: "PawCare Riverside", address: "48 River Road", rooms: 3, isEmergency: false },
+  { id: "c3", name: "PawCare 24/7", address: "5 Station Square", rooms: 6, isEmergency: true },
 ];
 
 export const SERVICES: Service[] = [
@@ -181,11 +155,7 @@ export const VETS: Vet[] = [
 ];
 
 // Schedules are generated relative to "today", so the data is always up to date
-function slotsFor(
-  dayOffset: number,
-  fromHour: number,
-  toHour: number,
-): string[] {
+function slotsFor(dayOffset: number, fromHour: number, toHour: number): string[] {
   const slots: string[] = [];
   for (let h = fromHour; h < toHour; h++) {
     for (const m of [0, 30]) {
@@ -211,11 +181,7 @@ const takeEvery = (slots: string[], n: number, offset = 0) =>
 
 export const SCHEDULES: Schedule[] = VETS.flatMap((vet, vetIndex) =>
   [0, 1, 2].map((day) => {
-    const slots = slotsFor(
-      day,
-      vetIndex % 2 === 0 ? 8 : 12,
-      vetIndex % 2 === 0 ? 14 : 18,
-    );
+    const slots = slotsFor(day, vetIndex % 2 === 0 ? 8 : 12, vetIndex % 2 === 0 ? 14 : 18);
     return {
       id: `sch-${vet.id}-${day}`,
       vetId: vet.id,

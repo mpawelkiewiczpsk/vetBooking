@@ -1,18 +1,23 @@
 {
   "expo": {
-    "name": "vetBooking",
-    "slug": "vetbooking",
+    "name": "PawCare",
+    "slug": "pawcare",
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
-    "ios": { "supportsTablet": true },
+    "ios": {
+      "supportsTablet": true
+    },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#0E9F8E",
         "foregroundImage": "./assets/android-icon-foreground.png"
       }
     },
-    "plugins": ["expo-font"]
+    "plugins": [
+      "expo-font"
+    ],
+    "scheme": "pawcare"
   }
 }
